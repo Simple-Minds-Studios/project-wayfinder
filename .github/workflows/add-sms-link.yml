@@ -1,0 +1,44 @@
+name: Add Simple Minds Studios link
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/add-sms-link.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-link:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add studio return link
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+          marker = "sms-studio-return-link"
+
+          if marker not in html:
+              link = '''\n<a id="sms-studio-return-link" href="https://simplemindsstudios.com" aria-label="Return to Simple Minds Studios" style="position:fixed;right:18px;bottom:18px;z-index:2147483647;padding:10px 14px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(10,10,12,.82);color:#f5f3ef;font:500 11px/1.2 system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,.24)">← Simple Minds Studios</a>\n'''
+              if "</body>" in html:
+                  html = html.replace("</body>", link + "</body>", 1)
+              else:
+                  html += link
+              path.write_text(html, encoding="utf-8")
+      - name: Commit updated exhibit
+        run: |
+          if git diff --quiet; then
+            echo "Studio link already present."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add link back to Simple Minds Studios"
+          git push
