@@ -1,0 +1,20 @@
+{
+  "source_repository": "Bartron773/project-wayfinder",
+  "source_default_sha": "aff474d7caada4b1c5779a089723a5356c59860d",
+  "organization_sha_before_audit": "62db3d72d08ef26abee6ed3c36b757a1eabfc5e6",
+  "common_ancestor": "aff474d7caada4b1c5779a089723a5356c59860d",
+  "source_description": null,
+  "source_homepage": null,
+  "preserved_branches": [],
+  "source_branch_map": [
+    {
+      "source_branch": "main",
+      "sha": "aff474d7caada4b1c5779a089723a5356c59860d",
+      "preserved_in": "organization main ancestry"
+    }
+  ],
+  "source_tags": [],
+  "issues_and_pull_requests": [],
+  "releases": [],
+  "note": "Git history and branch tips are preserved under archive/personal/*. GitHub issue/PR numbers, review threads, check runs, permissions and secrets are not Git objects. Source records remain at their original URLs. No credential values have been copied."
+}
